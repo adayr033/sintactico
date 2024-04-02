@@ -1,0 +1,359 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    NUMERO_DECIMAL
+    PUNTO
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> while_loop
+Rule 2     while_loop -> RESERVADA DELIMITADOR condition DELIMITADOR statement_or_block DELIMITADOR
+Rule 3     while_loop -> RESERVADA DELIMITADOR condition DELIMITADOR DELIMITADOR statement_or_block DELIMITADOR
+Rule 4     statement_or_block -> statement
+Rule 5     statement_or_block -> block_statement
+Rule 6     block_statement -> DELIMITADOR statement_list DELIMITADOR
+Rule 7     statement_list -> statement
+Rule 8     statement_list -> statement_list statement
+Rule 9     statement -> println_statement FINAL
+Rule 10    statement -> condition FINAL
+Rule 11    println_statement -> IDENTIFICADOR DELIMITADOR CADENA DELIMITADOR
+Rule 12    condition -> IDENTIFICADOR OPERADOR NUMERO_ENTERO
+Rule 13    condition -> IDENTIFICADOR OPERADOR CADENA
+
+Terminals, with rules where they appear
+
+CADENA               : 11 13
+DELIMITADOR          : 2 2 2 3 3 3 3 6 6 11 11
+FINAL                : 9 10
+IDENTIFICADOR        : 11 12 13
+NUMERO_DECIMAL       : 
+NUMERO_ENTERO        : 12
+OPERADOR             : 12 13
+PUNTO                : 
+RESERVADA            : 2 3
+error                : 
+
+Nonterminals, with rules where they appear
+
+block_statement      : 5
+condition            : 2 3 10
+println_statement    : 9
+program              : 0
+statement            : 4 7 8
+statement_list       : 6 8
+statement_or_block   : 2 3
+while_loop           : 1
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . while_loop
+    (2) while_loop -> . RESERVADA DELIMITADOR condition DELIMITADOR statement_or_block DELIMITADOR
+    (3) while_loop -> . RESERVADA DELIMITADOR condition DELIMITADOR DELIMITADOR statement_or_block DELIMITADOR
+
+    RESERVADA       shift and go to state 3
+
+    program                        shift and go to state 1
+    while_loop                     shift and go to state 2
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> while_loop .
+
+    $end            reduce using rule 1 (program -> while_loop .)
+
+
+state 3
+
+    (2) while_loop -> RESERVADA . DELIMITADOR condition DELIMITADOR statement_or_block DELIMITADOR
+    (3) while_loop -> RESERVADA . DELIMITADOR condition DELIMITADOR DELIMITADOR statement_or_block DELIMITADOR
+
+    DELIMITADOR     shift and go to state 4
+
+
+state 4
+
+    (2) while_loop -> RESERVADA DELIMITADOR . condition DELIMITADOR statement_or_block DELIMITADOR
+    (3) while_loop -> RESERVADA DELIMITADOR . condition DELIMITADOR DELIMITADOR statement_or_block DELIMITADOR
+    (12) condition -> . IDENTIFICADOR OPERADOR NUMERO_ENTERO
+    (13) condition -> . IDENTIFICADOR OPERADOR CADENA
+
+    IDENTIFICADOR   shift and go to state 6
+
+    condition                      shift and go to state 5
+
+state 5
+
+    (2) while_loop -> RESERVADA DELIMITADOR condition . DELIMITADOR statement_or_block DELIMITADOR
+    (3) while_loop -> RESERVADA DELIMITADOR condition . DELIMITADOR DELIMITADOR statement_or_block DELIMITADOR
+
+    DELIMITADOR     shift and go to state 7
+
+
+state 6
+
+    (12) condition -> IDENTIFICADOR . OPERADOR NUMERO_ENTERO
+    (13) condition -> IDENTIFICADOR . OPERADOR CADENA
+
+    OPERADOR        shift and go to state 8
+
+
+state 7
+
+    (2) while_loop -> RESERVADA DELIMITADOR condition DELIMITADOR . statement_or_block DELIMITADOR
+    (3) while_loop -> RESERVADA DELIMITADOR condition DELIMITADOR . DELIMITADOR statement_or_block DELIMITADOR
+    (4) statement_or_block -> . statement
+    (5) statement_or_block -> . block_statement
+    (9) statement -> . println_statement FINAL
+    (10) statement -> . condition FINAL
+    (6) block_statement -> . DELIMITADOR statement_list DELIMITADOR
+    (11) println_statement -> . IDENTIFICADOR DELIMITADOR CADENA DELIMITADOR
+    (12) condition -> . IDENTIFICADOR OPERADOR NUMERO_ENTERO
+    (13) condition -> . IDENTIFICADOR OPERADOR CADENA
+
+    DELIMITADOR     shift and go to state 9
+    IDENTIFICADOR   shift and go to state 15
+
+    condition                      shift and go to state 10
+    statement_or_block             shift and go to state 11
+    statement                      shift and go to state 12
+    block_statement                shift and go to state 13
+    println_statement              shift and go to state 14
+
+state 8
+
+    (12) condition -> IDENTIFICADOR OPERADOR . NUMERO_ENTERO
+    (13) condition -> IDENTIFICADOR OPERADOR . CADENA
+
+    NUMERO_ENTERO   shift and go to state 16
+    CADENA          shift and go to state 17
+
+
+state 9
+
+    (3) while_loop -> RESERVADA DELIMITADOR condition DELIMITADOR DELIMITADOR . statement_or_block DELIMITADOR
+    (6) block_statement -> DELIMITADOR . statement_list DELIMITADOR
+    (4) statement_or_block -> . statement
+    (5) statement_or_block -> . block_statement
+    (7) statement_list -> . statement
+    (8) statement_list -> . statement_list statement
+    (9) statement -> . println_statement FINAL
+    (10) statement -> . condition FINAL
+    (6) block_statement -> . DELIMITADOR statement_list DELIMITADOR
+    (11) println_statement -> . IDENTIFICADOR DELIMITADOR CADENA DELIMITADOR
+    (12) condition -> . IDENTIFICADOR OPERADOR NUMERO_ENTERO
+    (13) condition -> . IDENTIFICADOR OPERADOR CADENA
+
+    DELIMITADOR     shift and go to state 18
+    IDENTIFICADOR   shift and go to state 15
+
+    condition                      shift and go to state 10
+    statement_or_block             shift and go to state 19
+    statement_list                 shift and go to state 20
+    statement                      shift and go to state 21
+    block_statement                shift and go to state 13
+    println_statement              shift and go to state 14
+
+state 10
+
+    (10) statement -> condition . FINAL
+
+    FINAL           shift and go to state 22
+
+
+state 11
+
+    (2) while_loop -> RESERVADA DELIMITADOR condition DELIMITADOR statement_or_block . DELIMITADOR
+
+    DELIMITADOR     shift and go to state 23
+
+
+state 12
+
+    (4) statement_or_block -> statement .
+
+    DELIMITADOR     reduce using rule 4 (statement_or_block -> statement .)
+
+
+state 13
+
+    (5) statement_or_block -> block_statement .
+
+    DELIMITADOR     reduce using rule 5 (statement_or_block -> block_statement .)
+
+
+state 14
+
+    (9) statement -> println_statement . FINAL
+
+    FINAL           shift and go to state 24
+
+
+state 15
+
+    (11) println_statement -> IDENTIFICADOR . DELIMITADOR CADENA DELIMITADOR
+    (12) condition -> IDENTIFICADOR . OPERADOR NUMERO_ENTERO
+    (13) condition -> IDENTIFICADOR . OPERADOR CADENA
+
+    DELIMITADOR     shift and go to state 25
+    OPERADOR        shift and go to state 8
+
+
+state 16
+
+    (12) condition -> IDENTIFICADOR OPERADOR NUMERO_ENTERO .
+
+    DELIMITADOR     reduce using rule 12 (condition -> IDENTIFICADOR OPERADOR NUMERO_ENTERO .)
+    FINAL           reduce using rule 12 (condition -> IDENTIFICADOR OPERADOR NUMERO_ENTERO .)
+
+
+state 17
+
+    (13) condition -> IDENTIFICADOR OPERADOR CADENA .
+
+    DELIMITADOR     reduce using rule 13 (condition -> IDENTIFICADOR OPERADOR CADENA .)
+    FINAL           reduce using rule 13 (condition -> IDENTIFICADOR OPERADOR CADENA .)
+
+
+state 18
+
+    (6) block_statement -> DELIMITADOR . statement_list DELIMITADOR
+    (7) statement_list -> . statement
+    (8) statement_list -> . statement_list statement
+    (9) statement -> . println_statement FINAL
+    (10) statement -> . condition FINAL
+    (11) println_statement -> . IDENTIFICADOR DELIMITADOR CADENA DELIMITADOR
+    (12) condition -> . IDENTIFICADOR OPERADOR NUMERO_ENTERO
+    (13) condition -> . IDENTIFICADOR OPERADOR CADENA
+
+    IDENTIFICADOR   shift and go to state 15
+
+    statement_list                 shift and go to state 20
+    statement                      shift and go to state 26
+    println_statement              shift and go to state 14
+    condition                      shift and go to state 10
+
+state 19
+
+    (3) while_loop -> RESERVADA DELIMITADOR condition DELIMITADOR DELIMITADOR statement_or_block . DELIMITADOR
+
+    DELIMITADOR     shift and go to state 27
+
+
+state 20
+
+    (6) block_statement -> DELIMITADOR statement_list . DELIMITADOR
+    (8) statement_list -> statement_list . statement
+    (9) statement -> . println_statement FINAL
+    (10) statement -> . condition FINAL
+    (11) println_statement -> . IDENTIFICADOR DELIMITADOR CADENA DELIMITADOR
+    (12) condition -> . IDENTIFICADOR OPERADOR NUMERO_ENTERO
+    (13) condition -> . IDENTIFICADOR OPERADOR CADENA
+
+    DELIMITADOR     shift and go to state 28
+    IDENTIFICADOR   shift and go to state 15
+
+    statement                      shift and go to state 29
+    println_statement              shift and go to state 14
+    condition                      shift and go to state 10
+
+state 21
+
+    (4) statement_or_block -> statement .
+    (7) statement_list -> statement .
+
+  ! reduce/reduce conflict for DELIMITADOR resolved using rule 4 (statement_or_block -> statement .)
+    DELIMITADOR     reduce using rule 4 (statement_or_block -> statement .)
+    IDENTIFICADOR   reduce using rule 7 (statement_list -> statement .)
+
+  ! DELIMITADOR     [ reduce using rule 7 (statement_list -> statement .) ]
+
+
+state 22
+
+    (10) statement -> condition FINAL .
+
+    DELIMITADOR     reduce using rule 10 (statement -> condition FINAL .)
+    IDENTIFICADOR   reduce using rule 10 (statement -> condition FINAL .)
+
+
+state 23
+
+    (2) while_loop -> RESERVADA DELIMITADOR condition DELIMITADOR statement_or_block DELIMITADOR .
+
+    $end            reduce using rule 2 (while_loop -> RESERVADA DELIMITADOR condition DELIMITADOR statement_or_block DELIMITADOR .)
+
+
+state 24
+
+    (9) statement -> println_statement FINAL .
+
+    DELIMITADOR     reduce using rule 9 (statement -> println_statement FINAL .)
+    IDENTIFICADOR   reduce using rule 9 (statement -> println_statement FINAL .)
+
+
+state 25
+
+    (11) println_statement -> IDENTIFICADOR DELIMITADOR . CADENA DELIMITADOR
+
+    CADENA          shift and go to state 30
+
+
+state 26
+
+    (7) statement_list -> statement .
+
+    DELIMITADOR     reduce using rule 7 (statement_list -> statement .)
+    IDENTIFICADOR   reduce using rule 7 (statement_list -> statement .)
+
+
+state 27
+
+    (3) while_loop -> RESERVADA DELIMITADOR condition DELIMITADOR DELIMITADOR statement_or_block DELIMITADOR .
+
+    $end            reduce using rule 3 (while_loop -> RESERVADA DELIMITADOR condition DELIMITADOR DELIMITADOR statement_or_block DELIMITADOR .)
+
+
+state 28
+
+    (6) block_statement -> DELIMITADOR statement_list DELIMITADOR .
+
+    DELIMITADOR     reduce using rule 6 (block_statement -> DELIMITADOR statement_list DELIMITADOR .)
+
+
+state 29
+
+    (8) statement_list -> statement_list statement .
+
+    DELIMITADOR     reduce using rule 8 (statement_list -> statement_list statement .)
+    IDENTIFICADOR   reduce using rule 8 (statement_list -> statement_list statement .)
+
+
+state 30
+
+    (11) println_statement -> IDENTIFICADOR DELIMITADOR CADENA . DELIMITADOR
+
+    DELIMITADOR     shift and go to state 31
+
+
+state 31
+
+    (11) println_statement -> IDENTIFICADOR DELIMITADOR CADENA DELIMITADOR .
+
+    FINAL           reduce using rule 11 (println_statement -> IDENTIFICADOR DELIMITADOR CADENA DELIMITADOR .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: reduce/reduce conflict in state 21 resolved using rule (statement_or_block -> statement)
+WARNING: rejected rule (statement_list -> statement) in state 21
